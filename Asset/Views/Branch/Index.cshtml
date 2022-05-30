@@ -1,0 +1,39 @@
+﻿@model Asset.ViewModel.BranchVM.BranchListIndex
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="branchIndex" style="margin-top:25px; position:relative;">
+    <h3 class="text-muted text-center ">Branch Index</h3>
+    <div  >
+        <a asp-action="CreateBranch" class="btn btn-success" style="position:absolute;top:0;right:10px;">
+            <i class="fas fa-plus fa-2x"></i>
+        </a>
+    </div>
+    <table class="table mt-4 table-bordered table-hover text-dark" id="branchIndexTable">
+        <thead>
+            <tr class="bg-dark text-center">
+                <th>Branch Name</th>
+                <th>Open Now</th>
+                <th>Number Of Assets</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var branch in Model.ListBranch)
+            {
+            <tr class="text-center">
+
+                <td class="strongTd"><a class="text-white" asp-controller="Branch" asp-action="Detail" asp-route-id="@branch.Id">@branch.Name</a></td>
+                <td>@branch.IsLibraryOpened</td>
+                <td>@branch.AssetNumber</td>
+                <td>
+                    <a asp-action="UpdateBranch" asp-route-id="@branch.Id" class="btn btn-outline-primary">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

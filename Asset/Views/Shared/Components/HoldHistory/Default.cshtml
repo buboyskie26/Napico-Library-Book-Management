@@ -1,0 +1,9 @@
+﻿@model List<Asset.Data.Model.HoldHistory>
+<h3>Users</h3>
+
+<ul style="list-style:none;">
+    @foreach (var user in Model)
+    {
+        <li>@user.UserPrevious.FirstName</li>
+    }
+</ul>

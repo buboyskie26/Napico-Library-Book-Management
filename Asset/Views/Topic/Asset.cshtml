@@ -1,0 +1,89 @@
+﻿@model Asset.ViewModel.TopicVM.TopicGenreIndex;
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<Patron> SignInManager;
+@inject UserManager<Patron> UserManager;
+@using Asset.Data.Model;
+
+<div class="sectionHeading" style="position:relative;">
+    @*    <form asp-controller="LibraryAsset" asp-action="Search" method="post">
+            <div class="searchForm">
+                <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)" />
+                <button type="submit" class="btn btn-forumSearch">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <input asp-for="SearchObject.TopicId" type="hidden" name="id" />
+        </form>*@
+    <form asp-controller="Topic" asp-action="Search" method="post">
+        <div class="searchForm">
+            <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)" />
+            <button type="submit" class="btn btn-forumSearch">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <input asp-for="SearchObject.TopicId" type="hidden" name="id" />
+    </form>
+    <div class="float-right" style="position:absolute; top:20px;right:55px;">
+        <a class=" btn" style="background: white; color: #1b0760;">@Model.SearchObject.TopicTitle Book Genre</a>
+    </div>
+</div>
+<hr class="solid" />
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div>
+        <a class="btn float-right btn-success" style="margin-right:55px;" asp-controller="LibraryAsset" asp-route-id="@Model.Topic.Id" asp-action="CreateAsset">
+            <i class="fas fa-plus fa-2x"></i>
+        </a>
+    </div>
+
+}
+
+@if (Model.ListTopic.Any())
+{
+    <div class="row col-md-12 ml-2 sectionHeading" style="margin-top:40px;">
+
+
+        @foreach (var item in Model.ListTopic)
+        {
+            <div class="img-row">
+                <div class="img-container">
+                    <div class="img-div" style="background-image:url(@item.ImageUrl);">
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <a asp-controller="LibraryAsset" asp-action="UpdateAsset" asp-route-id="@item.AssetId" class="btn text-white update btn-sm btn-danger">Update</a>
+                        }
+
+                        <button class="photos">PHOTOS</button>
+                        <a href="" class="copies">@item.NumberOfCopies Copies</a>
+                        <p class="cost">$@item.Costs.ToString("F")</p>
+                    </div>
+                    <div class="img-content" style="position:relative;">
+                        <h3>@item.Title</h3>
+                        <p class="desc mt-2 mono-lg">
+                            @item.Description
+                        </p>
+                        <div class="float-left">
+                            <a asp-action="ViewCheckoutPatron" asp-route-id="@item.AssetId" class="btn btn-newPost" style="font-size:12px;position:absolute;bottom:0;left:0;margin-left:-15px;">@item.CheckHistoryCount PATRON</a>
+                        </div>
+                    </div>
+                    <a asp-action="Detail" asp-controller="LibraryAsset" asp-route-id="@item.AssetId" class="btn-checkout">Checkout</a>
+                </div>
+
+            </div>
+
+        }
+    </div>
+}
+else
+{
+    <div class="noPosts text-center">
+        <i class="material-icons md-72">question_answer</i>
+
+        <h3>No search results found for "@Model.SearchQuery"...</h3><span></span>
+    </div>
+}
+

@@ -1,0 +1,66 @@
+﻿@model Asset.ViewModel.HoldHistoryVM.HoldIndexList;
+
+<div class="container mono">
+    <div class="row">
+        <table class="table table-hover table-bordered">
+            <thead style="background-color: dimgrey">
+                <tr class="text-center">
+                    <td>Asset Name</td>
+                    <td>Card Id</td>
+                    <td>Previous Username</td>
+                    <td></td>
+                </tr>
+            </thead>
+            @if (Model.HistoryList.Any())
+            {
+                <tbody>
+
+                    @foreach (var item in Model.HistoryList)
+                    {
+                    <tr class="text-center">
+                        <td>@item.AssetName</td>
+                        <td>@item.CardId</td>
+                        <td>@item.PreviousUserName</td>
+
+                        @if (item.IsRead == false)
+                        {
+                            if (item.PreviousUserName != "Unknown")
+                            {
+                                <td>
+                                    <a asp-controller="LibraryAsset" asp-action="Detail" asp-route-id="@item.AssetId" class="btn btn-outline-primary btn-block text-white">
+                                        Go to your Book Reserve
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <button class="btn btn-outline-primary btn-block text-white">
+                                        Nothing
+                                    </button>
+                                </td>
+
+                            }
+
+                        }
+                        else
+                        {
+                            <td>
+                                <button class="btn btn-primary btn-block text-white">
+                                    Got the Book.
+                                </button>
+                            </td>
+                        }
+
+                    </tr>
+                    }
+       
+                </tbody>
+            }
+          
+
+        </table>
+    </div>
+</div>
+
+

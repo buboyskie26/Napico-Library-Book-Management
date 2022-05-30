@@ -1,0 +1,75 @@
+﻿@model Asset.ViewModel.HoldVM.ListHoldIndex;
+
+@if (Model.ListIndex.Any())
+{
+    <div class="divider"></div>
+
+    <div class="container mono">
+        <div class="row">
+            <table class="table table-hover table-bordered">
+                <thead style="background-color: dimgrey">
+                    <tr class="text-center">
+                        <td>Issued Date</td>
+                        <td>Genre Name</td>
+                        <td>Asset Name</td>
+                        <td>Card Id</td>
+                        <td>Status</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ListIndex)
+                    {
+                        <tr class="text-center">
+                            <td>
+                                @item.HoldIssued.ToString("d")
+                            </td>
+                            <td>@item.TopicName</td>
+                            <td>@item.AssetName</td>
+
+                            <td>@item.CardId</td>
+
+                            <td>
+                                @if (item.Issue == null)
+                                {
+                                    <a class="btn btn-block btn-outline-warning" asp-action="UpdatingPlaceHold" asp-route-id="@item.Id">
+                                        <span class="text-white">Pending</span>
+                                    </a>
+                                }
+                                else if (item.Issue == false)
+                                {
+                                    <span>Declined</span>
+                                }
+                                else if (item.Issue == true)
+                                {
+
+                                    @*       <a asp-action="Checkout" asp-route-id="@item.LibraAssetId">
+                                            <span>Checkout</span>
+
+                                        </a>*@
+
+                                }
+                                else
+                                {
+                                    <span>Confidential</span>
+
+                                }
+                            </td>
+                        </tr>
+                    }
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="noPosts text-center">
+        <i class="material-icons md-72">question_answer</i>
+
+        <h3>No Holds Data Yet...</h3><span></span>
+    </div>
+}
+

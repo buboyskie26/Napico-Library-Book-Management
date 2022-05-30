@@ -1,0 +1,481 @@
+﻿@model Asset.ViewModel.AssetVM.AssetIndex;
+@{
+    ViewData["Title"] = "Detail";
+}
+<div class="container mono">
+    <div class="page-header clearfix detailHeading">
+        <h2 class="text-muted text-center">View Library Item</h2>
+    </div>
+
+</div>
+<div class="jumbotron mono-slim">
+    <div class="row">
+        <div class="col-md-4">
+            <div>
+                <img class="detailImage " style="width:200px; padding-bottom:10px;" src="@Model.ImageUrl" />
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <p id="itemTitle">@Model.Title</p>
+
+            @if (Model.NumberOfCopies != 0)
+            {
+                <p>Number of Copies: @Model.NumberOfCopies</p>
+            }
+            else
+            {
+                <p>Number of Copies: Out of Stock</p>
+            }
+
+            <p id="itemStatus">@Model.StatusName</p>
+
+            <div class="mb-3">
+                <a class="text-white " asp-action="ViewCheckoutNames" asp-route-id="@Model.Id" id="itemLocation">Checked out by: (@Model.CheckoutCount) Patrons</a>
+
+            </div>
+
+            @if (Model.PatronName != "Unknown")
+            {
+                @*<p>Time Remaining: @Model.Diff.Days Day(s) @Model.Diff.Hours Hour(s) @Model.Diff.Minutes Minute(s) @Model.Diff.Seconds Second(s)</p>*@
+                @if (Model.PenaltyCount > 0)
+                {
+                    <p>Penalty Per Minute(s): @Model.PenaltyCount</p>
+
+                }
+
+            }
+
+
+
+            @if (Model.StatusName != "Lost")
+            {
+                if (Model.StatusName == "Checked Out")
+                {
+
+                    @if (Model.CheckoutUserEqualsLoginUser == false)
+                    {
+
+                        @if (Model.HoldNameApperance == 0 && Model.UserLostTheBook == false)
+                        {
+                            <p>
+                                <a class="btn btn-lg btn-block btn-outline-warning text-white"
+                                   asp-action="Hold" asp-route-id="@Model.Id">Apply for Reserve</a>
+                            </p>
+                        }
+
+
+                        @* else
+                    {
+                        <p>
+                            <button disabled class="btn btn-block btn-outline-warning text-white"
+                                    asp-action="Hold" asp-route-id="@Model.Id">
+                                Apply for Reserve
+                            </button>
+                        </p>
+                    }*@
+
+
+
+                    }
+
+
+                    @if (Model.CheckoutUserEqualsLoginUser == false)
+                    {
+                        if (Model.UserLostTheBook)
+                        {
+                            <a class="btn btn-success btn-lg btn-block text-white"
+                               asp-action="MarkAsFound" asp-route-id="@Model.Id">
+                                Mark as Found
+                            </a>
+                        }
+                    }
+                    @if (Model.CheckoutUserEqualsLoginUser == true)
+                    {
+                        <div class="mt-2">
+                            <p>
+                                <a class="btn btn-outline-info btn-lg btn-block text-white" asp-action="Checkin" asp-route-id="@Model.Id">Checked In</a>
+                            </p>
+
+                            <a class="btn btn-outline-danger btn-lg btn-block text-white" asp-action="CheckLost" asp-route-id="@Model.Id">Book was lost</a>
+
+                        </div>
+
+
+                    }
+                    else
+                    {
+
+                        @*<p>Please wait for @Model.PatronName to return the book or </p>*@
+
+
+
+
+
+                        @if (Model.HoldNameApperance == 0)
+                        {
+
+                            @*if (Model.LostCount >= Model.OrigCount)
+                        {
+                            <p>
+                                <button disabled class="btn btn-block btn-outline-warning text-white"
+                                        asp-action="Hold" asp-route-id="@Model.Id"
+                                        >Apply for Reserve
+                                </button>
+                            </p>
+                        }*@
+
+                            @*       else
+                        {
+                            <p>
+                                <a class="btn btn-block btn-outline-warning text-white" asp-action="Hold" asp-route-id="@Model.Id">Apply for Reserve</a>
+                            </p>
+                        }*@
+
+                        }
+                    }
+                }
+                if (Model.StatusName == "Available")
+                {
+
+                    @*  If the number of stock is till in their, it shows available  *@
+                    @if (Model.CheckoutUserEqualsLoginUser)
+                    {
+                        <div class="mt-2">
+                            <p>
+                                <a class="btn btn-outline-info btn-lg btn-block text-white" asp-action="Checkin" asp-route-id="@Model.Id">Checked In</a>
+                            </p>
+
+                            <a class="btn btn-outline-danger btn-lg btn-block text-white" asp-action="CheckLost" asp-route-id="@Model.Id">Book was lost</a>
+
+                        </div>
+                    }
+                    @if (Model.CheckoutUserEqualsLoginUser == false)
+                    {
+                        if (Model.UserLostTheBook)
+                        {
+                            <a class="btn btn-success btn-lg btn-block text-white"
+                               asp-action="MarkAsFound" asp-route-id="@Model.Id">
+                                Mark as Found
+                            </a>
+                        }
+                    }
+                    @*         @if (Model.CheckedinLostBook)
+                {
+                    <div class="mt-2">
+                        <p>
+                            <a class="btn btn-outline-info btn-lg btn-block text-white" asp-action="Checkin" asp-route-id="@Model.Id">Checked In</a>
+                        </p>
+
+                        <a class="btn btn-outline-danger btn-lg btn-block text-white" asp-action="CheckLost" asp-route-id="@Model.Id">Book was lost</a>
+
+                    </div>
+
+                }*@
+
+
+                    @*else if (Model.UserLostTheBook && Model.CheckInStatus == null)
+                {
+                    <a class="btn btn-success btn-lg btn-block text-white"
+                       asp-action="MarkAsFound" asp-route-id="@Model.Id">
+                        Mark as Found
+                    </a>
+
+                }
+                else if (Model.UserLostTheBook && Model.CheckInStatus != null)
+                {
+                    <p>
+                        <a class="btn btn-success btn-block text-white" asp-action="CheckRequest" asp-route-id="@Model.Id">Apply Book</a>
+                    </p>
+                }*@
+                    // if number of copies is zero and under to available status
+                    @if (Model.NumberOfCopies == 0)
+                    {
+                        <button class="btn btn-success btn-block text-white" disabled>Apply Book</button>
+
+                    }
+
+                    @if (Model.CurrentHold.Count() <= 0)
+                    {
+                        @if (Model.CheckoutUserEqualsLoginUser == false && Model.NumberOfCopies != 0 && Model.CheckedinLostBook == false)
+                        {
+                            <p>
+
+                                 @*  THE USER MUST NEED TO APPLY FOR BOOK AND GET THE APPROVAL FROM ADMIN
+                                BEFORE THEY`RE GOING TO PROCEED TO CHECKOUT.
+                                
+                                <a class="btn btn-lg btn-success btn-block text-white" asp-action="CheckRequest"
+                                   asp-route-id="@Model.Id">
+                                    Apply Book
+                                </a>*@
+                                
+                                
+                                <a class="btn btn-block btn-success text-white" asp-action="Checkout" asp-route-id="@Model.Id">
+                                    <span>Proceed Checkout</span>
+
+                                </a>
+
+                            </p>
+
+                            <input type="submit" class="btn btn-sm" value="Submit" name="submit" disabled>
+                        }
+
+
+                    }
+
+                    else if (Model.CurrentHold.Count() > 0)
+                    {
+                        if (Model.CheckoutUserEqualsLoginUser == false)
+                        {
+                            @* <p>There`s a @Model.CurrentHold.Count() Reserve User to this book.</p>*@
+
+                            <p>
+                                Please wait for
+                                <a class="text-white" asp-action="ViewCheckoutNames" asp-route-id="@Model.Id"
+                                   id="itemLocation">
+                                    (@Model.CheckoutCount)
+                                </a>
+                                Patrons to return the book
+                            </p>
+                        }
+
+                        @if (Model.CheckoutUserEqualsLoginUser == false)
+                        {
+                            <p>
+                                <button class="btn btn-success btn-block text-white" disabled>Apply Book</button>
+                            </p>
+                        }
+
+                    }
+
+                    // remove because when the user who was place a reserve and approved by the admin their requests
+                    // this must not be shown.
+                    @*           @if (Model.UserName == Model.HoldName && Model.IsValid == true)
+                {
+                        // remove
+                   <p>
+                        <a class="btn btn-outline-success text-white" asp-action="Checkout" asp-route-id="@Model.Id">Checked out by: @Model.PatronName</a>
+                    </p>
+                    // ^^
+
+                    <p>
+                        <a class="btn btn-outline-success text-white" asp-action="Checkout" asp-route-id="@Model.Id">
+                            <span  >Proceed Checkout</span>
+
+                        </a>
+                    </p>
+                }*@
+
+
+                }
+            }
+            else
+            {
+
+                <p>This item has been lost. It cannot be checked out.</p>
+                <p><a class="btn btn-lg btn-success" role="button" asp-controller="Catalog" asp-action="MarkFound" asp-route-id="@Model.Id">Mark Item Found</a></p>
+            }
+        </div>
+
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h4 class="text-center">Checkout History</h4>
+
+            <table class="table table-hover table-bordered">
+                <thead style="background-color:black;">
+
+                    <tr class="text-center">
+                        <td>Date Loaned</td>
+                        <td>Date Return</td>
+                        <td>Lost Return</td>
+                        <td>Book Lost</td>
+                        <td>Patron Name</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CheckoutHistories)
+                    {
+                        <tr class="text-center">
+
+                            <td>@item.CheckedOut.ToLongDateString()</td>
+
+                            @if (item.CheckIn == null)
+                            {
+                                <td>
+                                    <i class="fas fa-times fa-2x text-danger"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>@item.CheckIn </td>
+
+                            }
+
+                            @if (item.CheckInLostBook == null)
+                            {
+                                <td>
+                                    <i class="fas fa-times-circle fa-2x text-danger"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>@item.CheckInLostBook</td>
+
+                            }
+                            @if (item.IsLost)
+                            {
+                                <td>
+                                    <i class="fas fa-check-circle fa-2x text-gray"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fas fa-times-circle fa-2x text-gray-dark"></i>
+                                </td>
+                            }
+                            <td>@item.Patron.FirstName @item.Patron.LastName</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h4 class="text-center">Current Hold</h4>
+            <table class="table table-hover table-bordered">
+                <thead class="bg-dark">
+                    <tr class="text-center">
+                        <td>Hold Place</td>
+                        <td>Patron Name</td>
+                        <td>Status</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CurrentHold)
+                    {
+                        <tr class="text-center">
+
+                            <td>@item.HoldPlaced</td>
+                            <td>@item.PatronName</td>
+                            <td>
+                                @if (item.Issued == null)
+                                {
+                                    <a class="btn-block btn btn-sm" asp-action="UpdatingPlaceHold" asp-route-id="@item.Id">
+                                        <span class="bg-dark ">Pending</span>
+
+                                    </a>
+                                }
+                                else if (item.Issued == true)
+                                {
+                                    // Is act of checkedout the book from Hold List
+                                    if (Model.PatronName == item.PatronName && Model.PatronName == Model.UserName)
+                                    {
+                                        <a class="btn btn-sm btn-outline-warning btn-block text-white">
+                                            <span>Waiting for CheckIn</span>
+
+                                        </a>
+                                    }
+                                    if (Model.UserName != item.PatronName)
+                                    {
+                                        <button style="cursor:none;" class="btn btn-block text-white btn-outline-warning">Next for Checkout</button>
+                                    }
+                                    if (Model.UserName == item.PatronName && Model.PatronName != item.PatronName)
+                                    {
+                                        <a class="btn btn-block btn-success text-white" asp-action="Checkout" asp-route-id="@Model.Id">
+                                            <span>Proceed Checkout</span>
+
+                                        </a>
+                                    }
+
+
+                                    @*        else
+                                        {
+                                            if (item.PatronName == Model.PatronName && Model.PatronName != Model.UserName)
+                                            {
+                                                <button disabled class="btn btn-sm btn-outline-warning btn-block text-white" asp-action="Checkout" asp-route-id="@Model.Id">
+                                                    <span>Waiting for CheckIn</span>
+
+
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-success text-white" asp-action="Checkout" asp-route-id="@Model.Id">
+                                                    <span>Proceed Checkout</span>
+
+                                                </a>
+                                            }
+
+                                        }*@
+
+                                }
+                                else if (item.Issued == false)
+                                {
+                                    <span class="bg-danger">Abort</span>
+                                }
+                                else
+                                {
+                                    <span class="bg-danger">Undefined</span>
+                                }
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div id="calendar"></div>
+
+</div>
+
+
+@section Scripts{
+    @*    <script>
+            window.onload = function () {
+
+                document.getElementsByName("submit")[0].disabled = true;
+                setTimeout(function () {
+                    var element = document.getElementsByName("submit")[0];
+                    element.disabled = false;
+                }, 4000);
+            }
+        </script>*@
+
+
+    @if (Model.Recent == true)
+    {
+
+
+        <script>
+            window.onload = function () {
+
+                document.getElementsByName("submit")[0].disabled = true;
+                setTimeout(function () {
+                    var element = document.getElementsByName("submit")[0];
+                    element.disabled = false;
+                }, 5000);
+            }
+        </script>
+    }
+    else
+    {
+        <script>
+            window.onload = function () {
+
+                document.getElementsByName("submit")[0].disabled = true;
+                setTimeout(function () {
+                    var element = document.getElementsByName("submit")[0];
+                    element.disabled = false;
+                }, 0);
+            }
+        </script>
+
+    }
+}
+
+
+

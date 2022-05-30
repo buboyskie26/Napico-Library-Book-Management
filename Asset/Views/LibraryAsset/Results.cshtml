@@ -1,0 +1,62 @@
+﻿@model Asset.ViewModel.AssetVM.AssetSearchList;
+
+
+<div class="container body-content mono-slim">
+    <div class="row sectionHeader ">
+        <div class="sectionHeading">
+
+            <span style="margin-left:55px;">Search results for "@Model.SearchQuery"</span>
+            <form asp-action="Search" method="post">
+                <div class="searchForm">
+                    <input asp-for="SearchQuery" class="searchBar" type="text" />
+                    <button type="submit" class="btn btn-forumSearch">
+                        <i class="fas fa-search"></i>
+
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+    @if (Model.EmptySearch == false)
+    {
+        @foreach (var item in Model.ListAssetIndex)
+        {
+            <div class="img-row">
+                <div class="img-container">
+                    <div class="img-div" style="background-image:url(@item.ImageUrl);">
+                        <a asp-action="Update" asp-route-id="@item.Id" class="btn text-white update btn-sm btn-outline-success">Update</a>
+
+                        <button class="photos">PHOTOS</button>
+                        <a href="" class="copies">@item.NumberOfCopies Copies</a>
+                        <p class="cost">$@item.Cost.ToString("F")</p>
+                    </div>
+                    <div class="img-content">
+                        <h3>@item.Title</h3>
+                        <p class="desc mono-lg">
+                            @item.Description
+                        </p>
+                    </div>
+                    <a asp-action="Detail" asp-route-id="@item.Id" class="btn-checkout">Checkout</a>
+                </div>
+
+            </div>
+
+        }
+
+    }
+    else
+    {
+        <div class="noPosts text-center">
+            <i class="material-icons md-72">question_answer</i>
+
+            <h3>No search results found for "@Model.SearchQuery"...</h3><span></span>
+        </div>
+    }
+
+</div>
+
+
+
+

@@ -1,0 +1,115 @@
+﻿@model Asset.ViewModel.PatronVM.PatronIndex;
+
+<div class="container">
+    <div class="header clearfix detailHeading">
+        <h2 class="text-muted text-center">Patron Information</h2>
+    </div>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-6">
+
+                <div style="border:2px solid orange; padding:20px;">
+                    <h4 class="text-muted text-center">Patron Information</h4>
+
+                    <h2>@Model.FirstName @Model.LastName</h2>
+                    <div class="patronContact">
+
+                        <form method="post" asp-action="FinedPayment" asp-route-id="@Model.Id">
+                            <div asp-validation-summary="All"></div>
+                            <div id="patronTel">Library Card ID: @Model.LibraryCardId</div>
+                            <div id="patronAddress">Address: @Model.Address</div>
+                            <div id="patronDate">Member Since: @Model.Created</div>
+                            <div id="patronDate">Checkout Beyond: @Model.IsOverDue</div>
+                            <div class="row " style="margin-left:-8px;">
+                                <div class="col-md-6">
+                                    Penalty per minutes: @Model.PenaltyCount
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-sm btn-danger btn-block">Fined</button>
+
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="border:2px solid green; padding:20px;">
+                    <h4 class="text-center">Assets Currently Checked Out</h4>
+                    @if (Model.GetCheckoutWithPatron.Any())
+                    {
+                        <ul>
+                            @foreach (var item in Model.GetCheckoutWithPatron)
+                            {
+                                <li>
+                                    <b>@item.LibraryAsset.Title</b>  - Library Asset Id @item.LibraryAsset.Id
+
+                                    <ul>
+                                        <li>
+                                            Since: @item.Since
+                                            Until: @item.Until
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+
+
+
+                        </ul>
+                    }
+                    else
+                    {
+                        <h4 class="text-center">No Patron Checkout List</h4>
+                    }
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div style="border:2px solid pink; padding:20px;">
+                    <h4 class="text-center">Assets Currently Checked Out</h4>
+                    @if (Model.GetHoldWithPatron.Any())
+                    {
+                        @foreach (var item in Model.GetHoldWithPatron)
+                        {
+                            <p><b>@item.LibraryAsset.Title</b> - Placed: @item.HoldPlaced.ToString("d")</p>
+                        }
+                    }
+                    else
+                    {
+                        <h4 class="text-center">No Patron Holds List</h4>
+                    }
+
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div style="border:2px solid orangered; padding:20px;">
+                    <h4 class="text-center text-muted">Currently Checked Out History</h4>
+                    @if (Model.GetHoldWithPatron.Any())
+                    {
+                        @foreach (var item in Model.GetCheckoutHistoryWithPatron)
+                        {
+                            <div class="patronContact">
+                                <div id="patronTel">Date Loaned: @item.CheckIn</div>
+                                <div id="patronAddress">Date Returned: @item.CheckIn</div>
+                                <div id="patronDate">Library Card Id: @item.LibraryCard.Id</div>
+
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <h4 class="text-center">No Patron Checkout History List</h4>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+﻿@model Asset.ViewModel.TopicVM.TopicListCheckoutHistory;
+
+
+
+@if (Model.TopicObj != null)
+{
+    <h3 class="text-center">@Model.TopicObj.TopicName Book Section User(s)</h3>
+}
+
+<div class="sectionHeading" style="position:relative;">
+    <form asp-controller="Patron" asp-action="Search" method="post">
+        <div class="searchForm">
+
+            <input asp-for="SearchQuery" type="text" placeholder="Search..." class=" searchBar-patron" onfocus="clearThis(this)" />
+            <button type="submit" class="btn btn-forumSearch">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+    @*    <div>
+            <a asp-action="CreatePatron" class="float-right btn btn-success" style="margin-right:45px; position:absolute;top:0;right:10px;">
+                <i class="fas fa-plus fa-2x"></i>
+            </a>
+        </div>*@
+</div>
+
+<hr class="solid" />
+
+@if (Model.HistoryList.Any())
+{
+    <div id="patronIndex ">
+        <table class="table table-bordered text-dark mono" id="patronIndexTable">
+            <thead>
+                <tr class="text-center">
+                    <th>Checked Book Name</th>
+                    <th>Profile Link</th>
+                    <th>Full Name</th>
+                    <th>Library Card Id</th>
+                    <th>Date Checked In</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var patron in Model.HistoryList)
+                {
+                    <tr class="text-center">
+                        <td>@patron.AssetName</td>
+                        <td id="patronIcon">
+                            <a asp-controller="Patron" asp-action="Detail" asp-route-id="@patron.Id">
+                                @*<i class="fa fa-user fa-2x"></i> {Profile}*@
+                                <img src="@patron.ImageUrl" class="img-circle " style="width:75px;height:75px;" />
+                            </a>
+                            @* <div class="img-div" style="background-image:url(@patron.ImageUrl);">*@
+
+                        </td>
+                        <td>@patron.PatronName</td>
+
+                        <td>@patron.LibraryCardId</td>
+                        <td>@patron.CheckInDate</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+}
+else
+{
+    <h3 class="text-center">Oops.. No DATA YET.</h3>
+}
+
+

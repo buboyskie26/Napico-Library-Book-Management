@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<h3 class="text-center">Welcome to Napico Elementary Library</h3>
+
+
+<div class="container mono-slim"22>
+    <div class="col-md-12 row">
+
+        <div class="col-md-4">
+            <div class="img-outside">
+                <div class="img-inner" id="catalogPic">
+                    <p>Library Catalog</p>
+                </div>
+            </div>
+            <p class="viewAsset">View and manage library assets.</p>
+            <div class="catalog">
+                <a class="text-white" asp-controller="LibraryAsset" asp-action="Index">VIEW CATALOG</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="img-outside">
+                <div class="img-inner" id="patron">
+                    <p>PATRONS</p>
+                </div>
+            </div>
+            <p class="viewAsset">View and manage library patron data.</p>
+            <div class="catalog">
+                <a class="text-white" asp-controller="Patron" asp-action="Index">VIEW PATRONS INDEX</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="img-outside">
+                <div class="img-inner" id="branches">
+                    <p >BRANCHES</p>
+                </div>
+            </div>
+            <p class="viewAsset">View and manage Lakeview branches.</p>
+            <div class="catalog">
+                <a class="text-white" asp-controller="Branch" asp-action="Index">VIEW LIBRARY BRANCHES</a>
+            </div>
+        </div>
+    </div>
+  
+
+
+
+</div>

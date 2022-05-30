@@ -1,0 +1,35 @@
+﻿@model Asset.ViewModel.CheckoutRequestVM.RequestIndex;
+
+
+<div class="container">
+    <form method="post" asp-action="CheckRequest">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label asp-for="RequestDate" class="control-label">Current Date</label>
+                    <input asp-for="RequestDate" disabled type="text" class="form-control" />
+                    <span asp-validation-for="RequestDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            @* Reasons why you need to borrow this book? *@  
+
+            <input asp-for="LibraAssetId" type="hidden" />
+            <input asp-for="CardId" type="hidden" />
+            <input asp-for="UserId" type="hidden" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Request Book" class="btn btn-primary btn-block" />
+
+        </div>
+        <div>
+            <a class="btn btn-secondary btn-block" asp-action="Index">Back to List</a>
+        </div>
+    </form>
+
+</div>
+
+
+

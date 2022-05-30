@@ -1,0 +1,50 @@
+﻿@model Asset.ViewModel.PenaltyVM.PenaltyListIndex
+@{
+    ViewData["Title"] = "Index";
+}
+@if (Model.PenaltyList.Count() > 0)
+{
+<div class="col-md-10 offset-md-1 mono">
+    <h4 class="text-center">My Penalties</h4>
+    <table class="table table-hover table-bordered">
+        <thead   style="background-color:rgba(0,0,0,0.9);">
+            <tr class="text-center">
+                <td>Book Name</td>
+                <td>Penalty Amount</td>
+                <td>Date of Penalty</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PenaltyList)
+            {
+            <tr class="text-center">
+
+                <td>@item.AssetName</td>
+                @if (item.AmountPenalty <= 0)
+                {
+                    <td>No Penalties</td>
+                }
+                else
+                {
+                    <td>@item.AmountPenalty</td>
+
+                }
+                @if (item.PenaltyDate == new DateTime())
+                {
+                    <td>No Record</td>
+                }
+                else
+                {
+                    <td>@item.PenaltyDate</td>
+
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}
+else 
+{
+    <h2 class="text-center">It seems there`s no penalty</h2>
+ }

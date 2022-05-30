@@ -1,0 +1,469 @@
+﻿/*@import "./normalize.css";
+
+
+:root {
+  --color-primary: #2584ff;
+  --color-secondary: #00d9ff;
+  --color-accent: #ff3400;
+  --color-headings: #1b0760;
+  --color-body: #918ca4;
+  --color-body-darker: #5c5577;
+  --color-border: #ccc;
+  --border-radius: 30px;
+}
+*, *::after, *::before {
+    box-sizing: border-box;
+  }*/
+  
+  /* Typography */
+  
+  /*::selection {
+    background: var(--color-primary);
+    color: #fff;
+  }
+  
+  html {
+    font-size: 10px;
+  }
+ 
+  body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    line-height: 1.5;
+    color: var(--color-body);
+  }
+  img{
+    width: 100%;
+  }
+.img-container{
+  padding: 1rem;
+  width: 500px;
+  border: 1px solid var(--color-headings);
+  margin-left: 1rem;
+}
+.img-div{
+  position: relative;
+  padding: 2rem;
+  width: 100%;
+  border: 1px solid var(--color-headings);
+  background-image: url('../images/janeeyre.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-size: 100%;
+  height: 380px;
+}
+.img-div img{
+  position: relative;
+
+}
+.img-div button, p, a{
+  color: white;
+}
+.img-div .photos{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-accent);
+  border-radius: 20px;
+}
+.img-div .copies{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.5rem;
+  background-color: var(--color-secondary);
+  padding: 1.3rem;
+  border-radius: 100%;
+  color: #fff;
+}
+.img-div .cost{
+  position: absolute;
+  top: 0;
+  left: 15px;
+  font-size: 1.5rem;
+  background-color: var(--color-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  color: #fff;
+
+}
+.img-content{
+  padding: 1rem;
+}
+.img-content p{
+  color: black;
+  padding: 0 3rem;
+
+}
+.img-content h3{
+  color: var(--color-headings);
+  text-align: center;
+}
+.btn-checkout{
+  display: inline-block;
+  width: 100%;
+
+}
+.img-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}*/
+
+
+@import "./normalize.css";
+
+
+:root {
+    --color-primary: #2584ff;
+    --color-secondary: #00d9ff;
+    --color-accent: #ff3400;
+    --color-headings: #1b0760;
+    --color-body: #918ca4;
+    --color-body-darker: #5c5577;
+    --color-border: #ccc;
+    --border-radius: 30px;
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+/* Typography */
+
+::selection {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+html {
+    font-size: 15px;
+}
+
+body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    line-height: 1.5;
+    color: var(--color-body);
+}
+
+img {
+    width: 100%;
+}
+
+.img-container {
+    padding: 1rem;
+    width: 500px;
+    border: 1px solid var(--color-headings);
+    margin-left: 1rem;
+}
+
+.img-div {
+    position: relative;
+    padding: 2rem;
+    width: 100%;
+    border: 1px solid var(--color-headings);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 100%;
+    height: 380px;
+}
+
+    .img-div img {
+        position: relative;
+    }
+
+    .img-div button, p, a {
+        color: white;
+    }
+
+    .img-div .photos {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        background-color: var(--color-accent);
+        border-radius: 20px;
+    }
+    .img-div .update {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+    }
+    .img-div .copies {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 1.5rem;
+        background-color: var(--color-secondary);
+        padding: 1.3rem;
+        border-radius: 100%;
+        color: #fff;
+    }
+
+    .img-div .cost {
+        position: absolute;
+        top: 0;
+        left: 15px;
+        font-size: 1.5rem;
+        background-color: var(--color-primary);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        color: #fff;
+    }
+
+.img-content {
+     padding:10px;
+     display:flex;
+     flex-direction:column;
+     align-items:center;
+     justify-content:center;
+        text-align:center;
+}
+.desc{
+    width:100%;
+    flex:1;
+}
+    .img-content p {
+        color: black;
+        padding: 0 3rem;
+    }
+
+    .img-content h3 {
+        color: var(--color-headings);
+        text-align: center;
+    }
+
+.btn-checkout {
+    display: inline-block;
+    width: 100%;
+    color: var(--color-headings);
+    border: 2px solid var(--color-headings);
+    transition: 0.3s ease-in;
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    cursor: pointer;
+   text-align:center;
+    font-size:1.2rem;
+}
+
+    .btn-checkout:hover {
+        color: white;
+        background-color: var(--color-headings);
+    }
+
+.img-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.detailInfo {
+    padding: 10px;
+    font-size: 1.3em;
+    color: #555;
+}
+
+
+.searchForm{
+     margin-left:70px;
+}
+
+.searchBar {
+/*    padding: 5px 5px 2px 12px;*/
+    padding: 7px 15px;
+    margin: 10px 0 0 -15px;
+    background-color: #333;
+    width: 60%;
+    transition: ease .3s;
+    border: none;
+    border-radius: 28px;
+    font-size: 25px;
+}
+.searchBar-patron{
+    /*    padding: 5px 5px 2px 12px;*/
+    padding: 7px 15px;
+    margin: 10px 0 0 -15px;
+    background-color: #333;
+    width: 30%;
+    transition: ease .3s;
+    border: none;
+    border-radius: 28px;
+    font-size: 20px;
+}
+.sectionHeading {
+    font-family: 'Roboto';
+    font-size: 1.3em;
+    color:white;
+}
+
+.mono-slim{
+    font-family: 'Roboto';
+    font-size: 15px;
+    color: white;
+}
+.mono{
+    font-family: 'Roboto Mono';
+    font-size: 15px;
+    color: white;
+}
+.mono-lg{
+    font-family: 'Roboto Mono';
+    font-size: 18px;
+    color: white;
+}
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.sectionHeader {
+    background-color: #192620;
+    /*background-color: rgba(0, 0, 0, 0.9);*/
+    padding: 12px 0 24px 24px;
+}
+
+.noPosts {
+    text-align: center;
+    padding-top: 30px;
+    font-family: 'Roboto Mono';
+    background-color: rgba(255, 255, 255, 0.9);
+    padding-bottom:23px;
+}
+
+hr.solid {
+    margin-top:25px;
+    border-top: 3px solid #2584ff;
+    width:90%;
+}
+
+
+
+.img-outside {
+    width: 380px;
+    padding: 18px;
+    border-radius: 20px;
+}
+
+img {
+    width: 100%;
+}
+
+.container {
+    margin-top: 15px;
+}
+
+.img-inner {
+    
+    position: relative;
+}
+#catalogPic {
+    background-image: url('../images/books.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    width: 100%;
+    border-radius: 20px;
+}
+#patron {
+    background-image: url('../images/patron.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    width: 100%;
+    border-radius: 20px;
+}
+#branches {
+    background-image: url('../images/branch.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    width: 100%;
+    border-radius: 20px;
+}
+.container .viewAsset {
+    margin-top: 0;
+    margin-left: 25px;
+    color: grey;
+}
+
+.catalog {
+    margin-top: 22px;
+}
+
+    .catalog a {
+        padding: 0.6rem 1.2rem;
+        background-color: transparent;
+        font-size: 15px;
+        border-radius: 20px;
+        margin-left: 25px;
+        cursor: pointer;
+    }
+
+        .catalog a:hover {
+            background-color: var(--color-primary);
+            transition: 0.1s ease-in;
+        }
+
+.img-inner p {
+    position: absolute;
+    bottom: -20px;
+    left: 18px;
+    font-size: 23px;
+    font-weight: 500;
+    background-color: rgba(0,0,0,0.3);
+    padding: 1rem 1.3rem;
+    border-radius: 20px;
+}
+
+.forumLogo {
+    border-radius: 12px;
+    float: left;
+    margin-right: 20px;
+    height: 100px;
+    width: 100px;
+    background-color: #ddd;
+    border: 1px solid #555;
+    background-size: 100%
+}
+#forumIndexTable td {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+
+
+
+.btn-newPost {
+    background-color: #c62828 !important;
+    color: #fff !important;
+    transition: ease-in 0.1s;
+    border-radius: 16px !important;
+}
+    .btn-newPost:hover {
+        transition: ease-in 0.1s;
+        background-color: #e53935 !important;
+        color: #fff !important;
+    }
+ 
+
+.progress, .alert-success {
+    position: fixed;
+    height: 100px;
+    top: 50%;
+    left: 0;
+    width: 90%;
+    margin-left: 5%;
+}

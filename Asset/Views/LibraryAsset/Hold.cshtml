@@ -1,0 +1,31 @@
+﻿@model Asset.ViewModel.AssetVM.CheckoutIndex;
+
+
+<div class="container">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="row col-md-4">
+
+                <div>
+                    <h3 style="font-size:17px;">@Model.Title</h3>
+                    <img src="@Model.ImageUrl" style="width:250px; padding:10px;" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row col-md-8">
+            <h4>There`s currently number of Holds</h4>
+            <form method="post" asp-action="PlaceHold">
+                <input type="hidden" asp-for="AssetId" />
+                <div class="form-group">
+                    Enter Library Card Id
+                    <input type="text" asp-for="UserCardId" />
+                </div>
+                <button class="btn btn-success">Submit</button>
+
+            </form>
+        </div>
+    </div>
+
+</div>

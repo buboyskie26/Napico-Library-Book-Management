@@ -1,0 +1,72 @@
+﻿@model Asset.ViewModel.AssetVM.AssetIndex;
+
+
+<div class="mono-lg">
+    <a asp-action="ViewInCalendar" class="btn btn-block btn-checkout" style="width:200px;">
+        View in Calendar
+    </a>
+</div>
+
+<hr class="solid" />
+
+<div id="patronIndex ">
+    <table class="table table-bordered text-dark mono" id="patronIndexTable">
+        <thead>
+            <tr class="text-center">
+                <th>Genre</th>
+                <th>Asset Name</th>
+                <th>Date Loaned</th>
+                <th>Date Return</th>
+                <th>Lost (Return)</th>
+                <th>Book (Lost)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CheckoutHistories)
+            {
+            <tr class="text-center">
+                <td>@item.LibraryTopic.Title</td>
+                <td>@item.LibraryAsset.Title</td>
+                <td>@item.CheckedOut.ToLongDateString()</td>
+
+                @if (item.CheckIn == null)
+                {
+                    <td>
+                        <i class="fas fa-times fa-2x text-danger"></i>
+                    </td>
+                }
+                else
+                {
+                    <td>@item.CheckIn </td>
+
+                }
+
+                @if (item.CheckInLostBook == null)
+                {
+                    <td>
+                        <i class="fas fa-times-circle  text-danger"></i>
+                    </td>
+                }
+                else
+                {
+                    <td>@item.CheckInLostBook</td>
+
+                }
+                @if (item.IsLost)
+                {
+                    <td>
+                        <i class="fas fa-check-circle  text-gray"></i>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <i class="fas fa-times-circle text-gray-dark"></i>
+                    </td>
+                }
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

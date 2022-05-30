@@ -1,0 +1,64 @@
+﻿@model Asset.ViewModel.BranchVM.BranchIndex;
+
+
+<div class="wrapper">
+    <div class="main">
+        <main class="content">
+            <div class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-md-10 col-xl-12">
+                        <form method="post" enctype="multipart/form-data" asp-action="UpdateBranch">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <h5 class="text-white text-center">Employee info</h5>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="inputEmail4" class="form-label">Branch Name</label>
+                                        <input asp-for="@Model.Name" class="form-control" id="inputEmail4" placeholder="Library Branch Name">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="inputEmail4" class="form-label">Contact Number</label>
+                                        <input asp-for="@Model.Telephone" class="form-control" id="inputEmail4" placeholder="Library Branch Contact Number">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="inputEmail4" class="form-label">Branch Description</label>
+                                        <textarea asp-for="@Model.Description" class="form-control" id="inputEmail4" placeholder="Branch Description"></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="inputEmail4" class="form-label">Branch Address</label>
+                                        <textarea asp-for="@Model.Address" class="form-control" id="inputEmail4" placeholder="Branch Address"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-group col-md-3 text-center">
+                                            <label asp-for="ImageUrl">Branch Photo</label>
+                                        </div>
+                                        <div class="btn btn-sm btn-primary btn-icon-text text-white">
+
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <input asp-for="ImageUrl" type="file" value="Upload" />
+                                            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label asp-for="@Model.OpenDate" for="inputEmail4" class="form-label">Open Date</label>
+                                        <input asp-for="@Model.OpenDate" type="date" class="form-control" id="inputEmail4" placeholder="Branch Open Date" />
+                                    </div>
+
+                                    <input type="submit" class="btn btn-primary" value="Save Changes" />
+                                    <a asp-action="Index" class="btn text-white float-right btn-outline-primary">Go Back</a>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</div>

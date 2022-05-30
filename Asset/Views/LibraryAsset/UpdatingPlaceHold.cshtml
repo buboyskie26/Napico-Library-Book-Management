@@ -1,0 +1,20 @@
+﻿@model Asset.ViewModel.HoldVM.HoldIndex;
+
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="form-group">
+    
+            <a asp-action="ApproveHold" asp-route-id="@Model.Id" class="btn btn-success">
+                <i class="fa fa-check"></i> Approved
+
+            </a>
+            <a asp-action="DeclinedHold" asp-route-id="@Model.Id" class="btn btn-danger">
+                <i class="fa fa-times"></i> Decline
+
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@model Asset.ViewModel.PatronVM.PatronIndexSearch;
+
+
+<div class="container body-content mono-slim">
+    <div class="row sectionHeader ">
+        <div class="sectionHeading">
+
+            <span style="margin-left:55px;">Search results for "@Model.SearchQuery"</span>
+            <form asp-action="Search" method="post">
+                <div class="searchForm">
+                    <input asp-for="SearchQuery" class="searchBar" style="font-size:19px;" type="text" />
+                    <button type="submit" class="btn btn-forumSearch">
+                        <i class="fas fa-search"></i>
+
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+    @if (Model.IsEmpty == false)
+    {
+        <div id="patronIndex">
+            <table class="table table-bordered text-dark" id="patronIndexTable">
+                <thead>
+                    <tr class="text-center">
+                        <th>Profile Link</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Role</th>
+                        <th>Library Card Id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var patron in Model.ListPatron)
+                    {
+                        <tr class="text-center">
+
+                            <td id="patronIcon">
+                                <a asp-controller="Patron" asp-action="Detail" asp-route-id="@patron.Id">
+                                    <i class="fa fa-user fa-2x"></i> {Profile}
+                                </a>
+                            </td>
+                            <td>@patron.LastName</td>
+                            <td>@patron.FirstName</td>
+                            <td>@patron.Role</td>
+                            <td>@patron.LibraryCardId</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    }
+    else
+    {
+        <div class="noPosts text-center">
+            <i class="material-icons md-72">question_answer</i>
+
+            <h3>No search results found for "@Model.SearchQuery"...</h3><span></span>
+        </div>
+    }
+</div>

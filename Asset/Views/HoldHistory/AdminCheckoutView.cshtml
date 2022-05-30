@@ -1,0 +1,51 @@
+﻿@model Asset.ViewModel.HoldVM.ListHoldIndex;
+
+
+<hr class="solid" />
+
+<div id="patronIndex ">
+    <table class="table table-bordered text-dark mono" id="patronIndexTable">
+        <thead>
+            <tr class="text-center">
+                <th>Asset Name</th>
+                <th>Topic Name</th>
+                <th>Checkedout Out</th>
+                <th>Checkedout In</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var patron in Model.ListCheckout)
+            {
+                <tr class="text-center">
+                    <td>@patron.AssetName</td>
+
+                    <td>@patron.TopicName</td>
+
+                    <td>@patron.CheckedOut</td>
+                    <td>@patron.CheckIn</td>
+
+                    @if (patron.CheckIn == null)
+                    {
+                        <td>
+                            <a asp-controller="LibraryAsset" asp-action="Detail" asp-route-id="@patron.AssetId">
+                                Checked In Book
+                            </a>
+                        </td>
+
+                    }
+                    else if (patron.CheckIn != null)
+                    {
+                        <td>
+                            <button class="btn btn-outline-primary btn-block text-white">
+                                Returned Book
+                            </button>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

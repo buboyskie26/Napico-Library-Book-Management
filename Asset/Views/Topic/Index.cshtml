@@ -1,0 +1,43 @@
+﻿@model Asset.ViewModel.TopicVM.TopicListIndex;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row mono-lg col-md-11 " id="forumIndexContent" style="background-color:white; margin:0 auto;">
+    <table class="table table-hover table-bordered" id="forumIndexTable">
+        <tbody>
+            @foreach (var item in Model.ListTopic)
+            {
+                <tr>
+                    <td style="width:300px;">
+                        <div class="forumLogo" style="background-image: url(@item.ImageUrl); background-size:100%"></div>
+                        <div class="forumData ">
+                            <div class="forumTitle " style="font-size:22px;margin:0 auto;">
+                                <a asp-action="Asset" class="text-muted" asp-route-id="@item.Id" asp-controller="Topic">
+                                    @item.Title
+                                </a>
+                            </div>
+ 
+                        </div>
+                    </td>
+                    <td style="width:220px;">
+                        <div class="text-dark" style="font-size:17px;">@item.AssetNumber Book(s)</div>
+                        <div>
+                            <a class="text-muted" style="font-size:17px;" asp-action="ViewCheckoutBooks" asp-route-id="@item.Id">
+                                @item.CheckoutCount Checkout Books
+                            </a>
+                     
+                        </div>
+                    </td>
+                    <td class="mono">
+                        <div  >
+                            @item.Description
+
+                        </div>
+                    </td>
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

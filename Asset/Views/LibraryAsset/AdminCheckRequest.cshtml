@@ -1,0 +1,83 @@
+﻿@model Asset.ViewModel.CheckoutRequestVM.ListRequest;
+
+<div class="container mono">
+    <div class="row">
+        <table class="table table-hover table-bordered">
+            <thead style="background-color: dimgrey">
+                <tr class="text-center">
+                    <td>Username</td>
+                    <td>Genre</td>
+                    <td>Card Id</td>
+                    <td>Asset Name</td>
+                    <td>Admin Approved Date</td>
+                    <td>Book Return Date</td>
+                    <td>Status</td>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.RequestList)
+                {
+                    <tr class="text-center">
+                        <td>@item.UserName</td>
+                        <td>@item.TopicObj.TopicName</td>
+                        <td>@item.CardId</td>
+                        <td>@item.LibraryAssets.AssetName</td>
+                        <td>
+                            @item.Start
+                        </td>
+                        @if (item.Until == new DateTime())
+                        {
+                            <td>
+                                <button style="cursor: none; font-weight: bold; background-color:#2584ff;" class="btn btn-block">
+                                    <span>Not yet Returned</span>
+                                </button>
+                            </td>
+                        }
+                        else if (item.Until != new DateTime() && item.IsClick)
+                        {
+                            <td>@item.Until</td>
+                        }
+                        <td>
+                            @if (item.Approve == null)
+                            {
+                                <a asp-action="UpdateRequest" class="btn btn-block btn-outline-warning" asp-route-id="@item.Id">
+                                    <span class="text-white">Pending</span>
+                                </a>
+                            }
+                            else if (item.Approve == false)
+                            {
+                                <button style="cursor:not-allowed;font-weight:bold;" class="btn btn-outline-danger btn-block text-white btn-dark">
+                                    <span>Declined</span>
+                                </button>
+                            }
+                            else if (item.Approve == true)
+                            {
+                                if (item.IsClick == false)
+                                {
+                                    <a asp-action="Detail" class="btn btn-block btn-outline-primary" asp-route-id="@item.AssetId">
+                                        <span class="text-white">Checked In Book</span>
+                                    </a>
+                                }
+                                else if (item.IsClick == true)
+                                {
+
+                                    <a style="cursor:none;" class="btn btn-block text-white btn-outline-success" href="#">
+                                        <span>Transaction Success</span>
+
+                                    </a>
+                                }
+
+                            }
+                            else
+                            {
+                                <span>Confidential</span>
+
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
